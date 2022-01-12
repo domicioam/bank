@@ -1,3 +1,3 @@
 trait Presenter {
-  def present(statements: List[Statement]): Unit
+  def present(statements: List[Statement]): Presenter
 }
