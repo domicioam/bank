@@ -1,13 +1,20 @@
-class Account(statements: List[Statement], val balance: Int):
-  def deposit(amount: Int): Account = Account(statements :+ Deposit(amount), balance + amount)
+import java.time.LocalDate
 
-  def withdraw(amount: Int): Account =
+class Account(statements: List[Statement], val balance: Int = 0):
+  def deposit(amount: Int, date: LocalDate): Account = {
+    val newBalance = balance + amount
+    Account(statements :+ Deposit(date, amount, newBalance), newBalance)
+  }
+
+  def withdraw(amount: Int, date: LocalDate): Account =
     if amount > balance then this
-    else Account(statements :+ Withdraw(amount), balance - amount)
+    else {
+      val newBalance = balance - amount
+      Account(statements :+ Withdraw(date, amount, newBalance), newBalance)
+    }
 
   def getStatements(): List[Statement] = statements
 
 object Account:
-  def apply() = new Account(List.empty, 0)
-
+  def apply() = new Account(List.empty)
   def apply(statements: List[Statement], balance: Int) = new Account(statements, balance)

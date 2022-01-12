@@ -1,6 +1,7 @@
 import org.junit.Assert.{assertEquals, assertTrue}
 import org.junit.Test
 
+import java.time.LocalDate
 import java.util.Date
 
 class AccountServiceShould {
@@ -20,12 +21,16 @@ class AccountServiceShould {
   @Test
   def printStatement() =
     val presenter = MockPresenter()
-    val calendar = Calendar().setDate(Date(2012, 1, 10))
+    val date = LocalDate.of(2012, 1, 10)
+    val calendar = Calendar()
+    calendar.setDate(date)
     val accountService = AccountServiceImpl(presenter, calendar, Account())
     accountService.deposit(10)
     accountService.deposit(10)
     accountService.withdraw(10)
     accountService.deposit(10)
     accountService.printStatement()
-    assertEquals(List(Deposit(10), Deposit(10), Withdraw(10), Deposit(10)), presenter.statement_list)
+    assertEquals(
+      List(Deposit(date, 10, 10), Deposit(date, 10, 20), Withdraw(date, 10, 10), Deposit(date, 10, 20)),
+      presenter.statement_list)
 }

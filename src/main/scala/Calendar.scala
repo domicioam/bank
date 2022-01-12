@@ -1,9 +1,9 @@
-import java.util.Date
-class Calendar(date: Date) {
-  def setDate(date: Date) = Calendar(date)
+import java.time.{LocalDate, LocalDateTime}
+class Calendar(var date: LocalDate) {
+  def setDate(date: LocalDate) = this.date = date
   def getDate() = date
 }
 
 object Calendar:
-    def apply() = new Calendar(Date())
-    def apply(date: Date) = new Calendar(date)
+    def apply() = new Calendar(LocalDate.now())
+    def apply(date: LocalDate) = new Calendar(date)
