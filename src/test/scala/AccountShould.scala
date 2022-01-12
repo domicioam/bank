@@ -16,7 +16,7 @@ class AccountShould {
     assertEquals(List(Deposit(10), Withdraw(5)), newAccount.getStatements())
     assertEquals(5, newAccount.balance)
 
-  @Test(expected = classOf[Exception])
+  @Test
   def notWithdrawWhenBalanceNotEnough() =
     val account = Account()
     val newAccount = account.deposit(10).withdraw(15)

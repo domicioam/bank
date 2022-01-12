@@ -7,7 +7,7 @@ class PrintStatementFeature {
   def printStatement(): Unit =
     val calendar: Calendar = Calendar()
     val presenter: MockPresenter = MockPresenter()
-    val accountService: AccountService = AccountServiceImpl(presenter, calendar)
+    var accountService: AccountService = AccountServiceImpl(presenter, calendar, Account())
 
     calendar.setDate(Date(2012, 1, 10))
     accountService.deposit(1000)

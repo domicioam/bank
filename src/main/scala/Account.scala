@@ -1,7 +1,9 @@
 class Account(statements: List[Statement], val balance: Int):
   def deposit(amount: Int): Account = Account(statements :+ Deposit(amount), balance + amount)
 
-  def withdraw(amount: Int): Account = Account(statements :+ Withdraw(amount), balance - amount)
+  def withdraw(amount: Int): Account =
+    if amount > balance then this
+    else Account(statements :+ Withdraw(amount), balance - amount)
 
   def getStatements(): List[Statement] = statements
 
