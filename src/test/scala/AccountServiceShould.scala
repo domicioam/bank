@@ -23,6 +23,9 @@ class AccountServiceShould {
     val calendar = Calendar().setDate(Date(2012, 1, 10))
     val accountService = AccountServiceImpl(presenter, calendar, Account())
     accountService.deposit(10)
+    accountService.deposit(10)
+    accountService.withdraw(10)
+    accountService.deposit(10)
     accountService.printStatement()
-    assertEquals(List(Deposit(10)), presenter.statement_list)
+    assertEquals(List(Deposit(10), Deposit(10), Withdraw(10), Deposit(10)), presenter.statement_list)
 }
